@@ -1,0 +1,262 @@
+backend:
+  name: github
+  repo: OWNER/REPO # <-- Vaihda: github-käyttäjänimi/repo-nimi
+  branch: main
+
+# Vaihtoehto: Netlify Identity (kommentoi yllä, poista kommentit alta)
+# backend:
+#   name: git-gateway
+#   branch: main
+
+media_folder: "assets/images/uploads"
+public_folder: "/assets/images/uploads"
+locale: "fi"
+
+collections:
+  - name: "events"
+    label: "Tapahtumat"
+    file: "_data/events.yml"
+    description: "Etusivun ja Tapahtumat-sivun tapahtumalista"
+    editor:
+      preview: false
+    fields:
+      - label: "Tapahtumat"
+        name: "items"
+        widget: "list"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Päivä", name: "day", widget: "string", hint: "Esim. 21" }
+          - { label: "Kuukausi", name: "month", widget: "string", hint: "Esim. helmi" }
+          - { label: "Linkki", name: "url", widget: "string" }
+
+  - name: "uutiset"
+    label: "Uutiset"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    filter: { field: "category", value: "uutiset" }
+    editor: { preview: false }
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Otsikko", name: "title", widget: "string" }
+      - { label: "Päivämäärä", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - { label: "Kategoria", name: "category", widget: "hidden", default: "uutiset" }
+      - { label: "Sisältö", name: "body", widget: "markdown" }
+
+  - name: "tarinat"
+    label: "Tarinat"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    filter: { field: "category", value: "tarinat" }
+    editor: { preview: false }
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Otsikko", name: "title", widget: "string" }
+      - { label: "Päivämäärä", name: "date", widget: "datetime", format: "YYYY-MM-DD", date_format: "DD.MM.YYYY", time_format: false }
+      - { label: "Kategoria", name: "category", widget: "hidden", default: "tarinat" }
+      - { label: "Sisältö", name: "body", widget: "markdown" }
+
+  - name: "main-pages"
+    label: "Pääsivut"
+    editor: { preview: false }
+    files:
+      - name: "tapahtumat"
+        label: "Tapahtumat"
+        file: "_pages/tapahtumat.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tapahtumat/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "liity-jaseneksi"
+        label: "Liity jäseneksi"
+        file: "_pages/liity-jaseneksi.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/liity-jaseneksi/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "yhteystiedot"
+        label: "Yhteystiedot"
+        file: "_pages/yhteystiedot.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/yhteystiedot/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "tietosuojaseloste"
+        label: "Tietosuojaseloste"
+        file: "_pages/tietosuojaseloste.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietosuojaseloste/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+
+  - name: "jasenille"
+    label: "Jäsenille"
+    editor: { preview: false }
+    files:
+      - name: "jasenille-index"
+        label: "Jäsenille (pääsivu)"
+        file: "_pages/jasenille.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "jasenedut"
+        label: "Jäsenedut"
+        file: "_pages/jasenille/jasenedut.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/jasenedut/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "valinevuokraus"
+        label: "Välinevuokraus"
+        file: "_pages/jasenille/valinevuokraus.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/valinevuokraus/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "vaakkoin-erakamppa"
+        label: "Vaakkoin eräkämppä"
+        file: "_pages/jasenille/vaakkoin-erakamppa.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/vaakkoin-erakamppa/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "talviuinti-rastilassa"
+        label: "Talviuinti Rastilassa"
+        file: "_pages/jasenille/talviuinti-rastilassa.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/talviuinti-rastilassa/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "itseasiointi"
+        label: "Jäsenten itseasiointi"
+        file: "_pages/jasenille/itseasiointi.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/jasenille/itseasiointi/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+
+  - name: "tietoa-meista"
+    label: "Tietoa meistä"
+    editor: { preview: false }
+    files:
+      - name: "tietoa-meista-index"
+        label: "Tietoa meistä (pääsivu)"
+        file: "_pages/tietoa-meista.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "hallitus"
+        label: "Hallitus ja jaokset"
+        file: "_pages/tietoa-meista/hallitus-ja-jaokset.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/hallitus-ja-jaokset/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "maunulan-maja"
+        label: "Maunulan ulkoilumaja"
+        file: "_pages/tietoa-meista/maunulan-maja.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/maunulan-maja/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "saannot"
+        label: "Säännöt"
+        file: "_pages/tietoa-meista/saannot.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/saannot/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "toimintasuunnitelma"
+        label: "Toimintasuunnitelma"
+        file: "_pages/tietoa-meista/toimintasuunnitelma.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/toimintasuunnitelma/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "vastuullisuus"
+        label: "Vastuullisuus"
+        file: "_pages/tietoa-meista/vastuullisuus.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tietoa-meista/vastuullisuus/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+
+  - name: "tule-mukaan"
+    label: "Tule mukaan"
+    editor: { preview: false }
+    files:
+      - name: "tule-mukaan-index"
+        label: "Tule mukaan (pääsivu)"
+        file: "_pages/tule-mukaan.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tule-mukaan/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "toiminta-ja-lajit"
+        label: "Toiminta ja lajit"
+        file: "_pages/tule-mukaan/toiminta-ja-lajit.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tule-mukaan/toiminta-ja-lajit/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "vapaaehtoisena"
+        label: "Toimi vapaaehtoisena"
+        file: "_pages/tule-mukaan/toimi-vapaaehtoisena.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tule-mukaan/toimi-vapaaehtoisena/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "yhdessa-ulkoillen"
+        label: "Yhdessä ulkoillen"
+        file: "_pages/tule-mukaan/yhdessa-ulkoillen.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tule-mukaan/yhdessa-ulkoillen/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "ohjeet-ensikertalaiselle"
+        label: "Ohjeet ensikertalaiselle"
+        file: "_pages/ohjeet-ensikertalaiselle.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/ohjeet-ensikertalaiselle/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "tee-yhteistyota"
+        label: "Tee yhteistyötä kanssamme"
+        file: "_pages/tee-yhteistyota-kanssamme.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/tee-yhteistyota-kanssamme/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }
+      - name: "vaikuttaminen"
+        label: "Vaikuttaminen"
+        file: "_pages/vaikuttaminen.md"
+        fields:
+          - { label: "Otsikko", name: "title", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Permalink", name: "permalink", widget: "hidden", default: "/vaikuttaminen/" }
+          - { label: "Sisältö", name: "body", widget: "markdown" }

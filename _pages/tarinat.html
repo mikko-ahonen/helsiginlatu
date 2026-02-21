@@ -1,0 +1,26 @@
+---
+layout: default
+title: Tarinat
+permalink: /ajankohtaista/tarinat/
+---
+<div class="container">
+  <div class="breadcrumb"><a href="/">Etusivu</a> &raquo; <a href="{{ '/ajankohtaista/' | relative_url }}">Ajankohtaista</a> &raquo; Tarinat</div>
+  <div class="page-layout">
+    <div class="page-content">
+      <h1>Tarinat</h1>
+      <div class="activity-pills" style="margin-bottom:30px">
+        <a href="{{ '/ajankohtaista/uutiset/' | relative_url }}" class="activity-pill">Uutiset</a>
+        <a href="{{ '/ajankohtaista/tarinat/' | relative_url }}" class="activity-pill">Tarinat</a>
+      </div>
+      {% for post in site.posts %}
+        {% if post.category == "tarinat" %}
+        <div class="post-list-item">
+          <p class="meta">{{ post.date | date: "%-d.%-m.%Y" }}</p>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+        </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

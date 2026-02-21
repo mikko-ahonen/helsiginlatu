@@ -1,0 +1,31 @@
+title: Helsingin Latu ja Polku ry
+description: >-
+  Liikutaan ja nautitaan luonnosta yhdessä! Suomen Ladun suurin paikallisyhdistys.
+baseurl: ""
+url: "https://helsinginlatu.fi"
+logo: /assets/images/helapo_logo_350x90.jpg
+markdown: kramdown
+permalink: pretty
+collections:
+  pages:
+    output: true
+    permalink: /:path/
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "page"
+exclude:
+  - README.md
+  - LICENSE
+  - Gemfile
+  - Gemfile.lock
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"

@@ -1,0 +1,88 @@
+---
+layout: home
+title: Etusivu
+---
+<section class="hero">
+  <div class="container">
+    <h1>Liikutaan &amp; nautitaan luonnosta yhdessä!</h1>
+    <p>Olemme Suomen Ladun suurin paikallisyhdistys. Järjestämme mielekästä toimintaa jäsenillemme luonnossa. Tule mukaan!</p>
+    <div class="hero-buttons">
+      <a href="{{ '/tapahtumat/' | relative_url }}" class="btn btn-white">Tapahtumat</a>
+      <a href="{{ '/liity-jaseneksi/' | relative_url }}" class="btn btn-outline">Liity jäseneksi</a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Löydä oma tapasi ulkoilla</h2>
+    <div class="activity-pills">
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=hiihto" class="activity-pill">Hiihto</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=keppijumppa" class="activity-pill">Keppijumppa</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=kurssit" class="activity-pill">Kurssit</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=lauluillat" class="activity-pill">Lauluillat</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=lentopallo" class="activity-pill">Lentopallo</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=polkujuoksu" class="activity-pill">Polkujuoksu</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=paivakavelyt" class="activity-pill">Päiväkävelyt</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=talviuinti" class="activity-pill">Talviuinti</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=kokous" class="activity-pill">Kokous</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=maastopyoraily" class="activity-pill">Maastopyöräily</a>
+      <a href="{{ '/tapahtumat/' | relative_url }}?filter=retkeily" class="activity-pill">Retkeily</a>
+    </div>
+  </div>
+</section>
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Pikalinkit</h2>
+    <div class="quick-links">
+      <a href="{{ '/tietoa-meista/maunulan-maja/' | relative_url }}" class="quick-link-card"><h3>Maunulan ulkoilumaja</h3><p>Yhdistyksen kotipaikka Keskuspuistossa</p></a>
+      <a href="{{ '/jasenille/vaakkoin-erakamppa/' | relative_url }}" class="quick-link-card"><h3>Vaakkoin eräkämppä</h3><p>Eräkämppä Nuuksiossa</p></a>
+      <a href="{{ '/jasenille/valinevuokraus/' | relative_url }}" class="quick-link-card"><h3>Välinevuokraus</h3><p>Vuokraa ulkoiluvälineitä jäsenhintaan</p></a>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Tulevat tapahtumat</h2>
+    <div class="events-list">
+      {% for event in site.data.events limit:8 %}
+      <div class="event-item">
+        <div class="event-date-box"><span class="day">{{ event.day }}</span><span class="month">{{ event.month }}</span></div>
+        <div class="event-info"><h3><a href="{{ event.url }}" target="_blank" rel="noopener">{{ event.title }}</a></h3></div>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:20px"><a href="{{ '/tapahtumat/' | relative_url }}" class="btn btn-green">Kaikki tapahtumat</a></p>
+  </div>
+</section>
+<section class="section section-alt">
+  <div class="container">
+    <h2 class="section-title">Uutiset</h2>
+    <div class="news-grid">
+      {% assign news = site.posts | where: "category", "uutiset" %}
+      {% for post in news limit:3 %}
+      <div class="news-card">
+        <div class="news-card-body">
+          <p class="news-card-date">{{ post.date | date: "%-d.%-m.%Y" }}</p>
+          <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+          <p>{{ post.excerpt | strip_html | truncatewords: 20 }}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <p style="margin-top:20px"><a href="{{ '/ajankohtaista/uutiset/' | relative_url }}">Kaikki uutiset</a></p>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <h2 class="section-title">Tarinat</h2>
+    {% assign stories = site.posts | where: "category", "tarinat" %}
+    {% for post in stories limit:1 %}
+    <div class="story-card">
+      <h3><a href="{{ post.url | relative_url }}">{{ post.title }}</a></h3>
+      <p>{{ post.excerpt | strip_html | truncatewords: 30 }}</p>
+    </div>
+    {% endfor %}
+    <p style="margin-top:15px"><a href="{{ '/ajankohtaista/tarinat/' | relative_url }}">Kaikki tarinat</a></p>
+  </div>
+</section>
+{% include cta-jasenpalvelut.html %}

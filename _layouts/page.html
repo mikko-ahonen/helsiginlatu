@@ -1,0 +1,26 @@
+---
+layout: default
+---
+<div class="container">
+  <div class="breadcrumb">
+    <a href="{{ '/' | relative_url }}">Etusivu</a> &raquo; {{ page.title }}
+  </div>
+  <div class="page-layout">
+    {% if page.sidebar_items %}
+    <aside class="page-sidebar">
+      <div class="sidebar-nav">
+        <div class="sidebar-nav-title">{{ page.sidebar_title | default: page.title }}</div>
+        <ul>
+          {% for item in page.sidebar_items %}
+          <li><a href="{{ item.url | relative_url }}">{{ item.title }}</a></li>
+          {% endfor %}
+        </ul>
+      </div>
+    </aside>
+    {% endif %}
+    <div class="page-content">
+      <h1>{{ page.title }}</h1>
+      {{ content }}
+    </div>
+  </div>
+</div>

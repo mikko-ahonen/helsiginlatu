@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% if page.title and page.title != "Etusivu" %}{{ page.title }} - {{ site.title }}{% else %}Liikutaan ja nautitaan luonnosta yhdessä - {{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  {% seo %}
+  <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+  {% include topbar.html %}
+  {% include header.html %}
+  {% include nav.html %}
+  <main id="main-content">{{ content }}</main>
+  {% include footer.html %}
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      var t = document.querySelector('.nav-toggle');
+      var n = document.querySelector('.site-nav');
+      if (t && n) t.addEventListener('click', function() { n.classList.toggle('open'); });
+      if (window.netlifyIdentity) {
+        window.netlifyIdentity.on("init", function(user) {
+          if (!user) window.netlifyIdentity.on("login", function() {
+            document.location.href = "/admin/";
+          });
+        });
+      }
+    });
+  </script>
+</body>
+</html>
